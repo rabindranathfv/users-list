@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export default class List extends Component {
 
     handleClick = id => e => {
-        console.log( id );
+        const { handleClick } = this.props
+        console.log('enviado id in LIST COMPONENT', id);
+        handleClick(id);
     }
     render() {
         const { users } = this.props

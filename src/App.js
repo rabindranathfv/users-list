@@ -7,6 +7,7 @@ import axios from 'axios';
 class App extends Component {
   state = {
     usersData: [],
+    userSelected: undefined,
     route: 'list'
   }
 
@@ -17,13 +18,17 @@ class App extends Component {
         this.setState({ usersData: data }) 
       });
   }
+
+  selectedUser = (id) => {
+    this.setState({ route: 'form' , userSelected: id })
+  }
   render() {
     console.log(this.state.usersData)
-    const { route, usersData } = this.state
+    const { route, usersData, userSelected } = this.state
     return (
       <div className="App">
-        { route === 'list' && <ViewList users={ usersData }/> }
-        { route === 'form' && <UserForm /> }
+        { route === 'list' && <ViewList handleClick={this.selectedUser} users={ usersData }/> }
+        { route === 'form' && <UserForm userId={userSelected} /> }
       </div>
       )
   }

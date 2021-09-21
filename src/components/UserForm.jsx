@@ -2,8 +2,11 @@ import React, { Component } from "react";
 
 export default class UserForm extends Component {
     render() {
+        const { userId } = this.props
         return(
-            'UserForm component'
+            <div>
+                { <p>userForm with id { userId} </p>}
+            </div>
         )
     }
 }
