@@ -7,11 +7,12 @@ const style = {
 }
 export default class HeaderView extends Component {
     render() {
+        const { createUser } = this.props
         return(
             <header>
                 <h2 style={style.inline}>Users</h2>
 
-                <button style={style.inline}> New User </button>
+                <button style={style.inline} onClick={createUser}> New User </button>
             </header>
         )
     }

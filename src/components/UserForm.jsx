@@ -5,7 +5,7 @@ export default class UserForm extends Component {
         const { userId } = this.props
         return(
             <div>
-                { <p>userForm with id { userId} </p>}
+                { userId ? <p>userForm for userId id { userId} </p>: <p> Create new User </p>}
             </div>
         )
     }
