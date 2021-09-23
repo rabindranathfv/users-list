@@ -26,6 +26,14 @@ class App extends Component {
   createUser = () => {
     this.setState({ route: 'form' })
   }
+
+  AddNewUser = (user) => {
+    axios.post('https://jsonplaceholder.typicode.com/users', user)
+      .then( ({data}) => {
+        const newUsersData = this.state.usersData.concat(data);
+        this.setState({ usersData: newUsersData, route: 'list' }) 
+      });
+  }
   render() {
     console.log(this.state.usersData)
     const { route, usersData, userSelected } = this.state
@@ -34,7 +42,7 @@ class App extends Component {
         { route === 'list' && <ViewList handleClick={this.selectedUser}
                               users={ usersData }
                               createUser={this.createUser}/> }
-        { route === 'form' && <UserForm userId={userSelected} /> }
+        { route === 'form' && <UserForm userId={userSelected} AddNewUser={this.AddNewUser}/> }
       </div>
       )
   }

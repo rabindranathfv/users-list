@@ -29,12 +29,13 @@ export default class UserForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const { errors, ...formInfo } = this.state;
-        const userInfo = validate(formInfo);
+        const { errors, ...formInfo } = this.state
+        const userInfo = validate(formInfo)
         this.setState({ errors: userInfo})
         if (!Object.keys(userInfo).length) {
-            // send data from backend
-            e.target.reset()
+            const { AddNewUser } = this.props
+            AddNewUser(formInfo)
+            e.target.reset();
         }
         console.log('create new User');
     }
@@ -42,7 +43,7 @@ export default class UserForm extends Component {
         const { userId } = this.props
         const { errors } = this.state
         return(
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 { userId ? <p>userForm for userId id { userId} </p>: <p> Create new User </p>}
                 <input name="name" placeholder="name" onChange={this.handleChange} />
                 { errors.name && <p>{errors.name}</p> }
@@ -50,7 +51,7 @@ export default class UserForm extends Component {
                 { errors.email && <p>{errors.email}</p> }
                 <input name="website" placeholder="website" onChange={this.handleChange} />
                 { errors.website && <p>{errors.website}</p> }
-                <input type="submit" value="send" onClick={this.handleSubmit} />
+                <input type="submit" value="send" />
             </form>
         )
     }
