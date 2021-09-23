@@ -35,21 +35,22 @@ export default class UserForm extends Component {
         if (!Object.keys(userInfo).length) {
             const { AddNewUser } = this.props
             AddNewUser(formInfo)
-            e.target.reset();
+            e.target.reset()
         }
-        console.log('create new User');
     }
+    
     render() {
-        const { userId } = this.props
+        const { userId, userUpdate } = this.props
+        const { name, email, website } = userUpdate
         const { errors } = this.state
         return(
             <form onSubmit={this.handleSubmit}>
                 { userId ? <p>userForm for userId id { userId} </p>: <p> Create new User </p>}
-                <input name="name" placeholder="name" onChange={this.handleChange} />
+                <input name="name" defaultValue={name} placeholder="name" onChange={this.handleChange} />
                 { errors.name && <p>{errors.name}</p> }
-                <input name="email" placeholder="email" onChange={this.handleChange} />
+                <input name="email" defaultValue={email} placeholder="email" onChange={this.handleChange} />
                 { errors.email && <p>{errors.email}</p> }
-                <input name="website" placeholder="website" onChange={this.handleChange} />
+                <input name="website" defaultValue={website} placeholder="website" onChange={this.handleChange} />
                 { errors.website && <p>{errors.website}</p> }
                 <input type="submit" value="send" />
             </form>

@@ -34,15 +34,18 @@ class App extends Component {
         this.setState({ usersData: newUsersData, route: 'list' }) 
       });
   }
+
   render() {
-    console.log(this.state.usersData)
-    const { route, usersData, userSelected } = this.state
+    const { route, usersData, userSelected } = this.state;
+    const userUpdate = usersData.length>0 && usersData.find( u => u.id === userSelected )
     return (
       <div className="App">
         { route === 'list' && <ViewList handleClick={this.selectedUser}
                               users={ usersData }
                               createUser={this.createUser}/> }
-        { route === 'form' && <UserForm userId={userSelected} AddNewUser={this.AddNewUser}/> }
+        { route === 'form' && <UserForm userId={userSelected}
+                              userUpdate={userUpdate || {} }
+                              AddNewUser={this.AddNewUser}/> }
       </div>
       )
   }

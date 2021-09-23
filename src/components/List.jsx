@@ -4,9 +4,9 @@ export default class List extends Component {
 
     handleClick = id => e => {
         const { handleClick } = this.props
-        console.log('enviado id in LIST COMPONENT', id);
         handleClick(id);
     }
+    
     render() {
         const { users } = this.props
         return(
