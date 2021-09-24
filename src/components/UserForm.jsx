@@ -39,7 +39,7 @@ export default class UserForm extends Component {
         e.preventDefault()
         const { errors, ...formInfo } = this.state
         const userInfo = validate(formInfo)
-        this.setState({ errors: userInfo})
+        
         if (!Object.keys(userInfo).length) {
             const { AddNewUser, userUpdate, userUpdateInfo } = this.props
             if (userUpdate.id) {
@@ -48,6 +48,8 @@ export default class UserForm extends Component {
                 AddNewUser(formInfo)
             }
             e.target.reset()
+        } else {
+            this.setState({ errors: userInfo})
         }
     }
 

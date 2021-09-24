@@ -40,6 +40,9 @@ class App extends Component {
       .then( () => {
           const userUpdated = this.state.usersData.map( u => id === u.id ? data : u)
           this.setState({ route: 'list', usersData: userUpdated })
+      })
+      .catch( (e) => {
+        console.warn('Error server side');
       });
   }
 
