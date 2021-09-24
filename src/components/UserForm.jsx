@@ -20,6 +20,14 @@ export default class UserForm extends Component {
         errors: {}
     }
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            ...this.state,
+            ...this.props.userUpdate
+        }
+    }
+
     handleChange = (e) => {
         const { target } = e
         this.setState({
@@ -33,12 +41,16 @@ export default class UserForm extends Component {
         const userInfo = validate(formInfo)
         this.setState({ errors: userInfo})
         if (!Object.keys(userInfo).length) {
-            const { AddNewUser } = this.props
-            AddNewUser(formInfo)
+            const { AddNewUser, userUpdate, userUpdateInfo } = this.props
+            if (userUpdate.id) {
+                userUpdateInfo(userUpdate.id, formInfo);
+            } else {
+                AddNewUser(formInfo)
+            }
             e.target.reset()
         }
     }
-    
+
     render() {
         const { userId, userUpdate } = this.props
         const { name, email, website } = userUpdate
